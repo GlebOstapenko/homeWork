@@ -10,9 +10,9 @@ while trigger == "start":
 Виведіть на екран.\n""")
     task_number = "0"
     while task_number != "1" and task_number != "2" and task_number != "3":
-        task_number = str(input("Введіть номер завдання: "))
+        task_number = str(input("Введите номер задания: "))
         if task_number != "1" and task_number != "2" and task_number != "3":
-            print("Ви вказали неправильний номер завдання, спробуйте ще!")
+            print("Вы указани не правильный номер задания, попробуйте ещё раз!")
 
     if task_number == "1" or task_number == "2":
         print(f"Введите, пожалуйста, числа для задания №{task_number} "
