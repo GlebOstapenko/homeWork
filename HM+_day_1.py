@@ -97,7 +97,7 @@ while trigger == "start":
     while task_number != "continue" and task_number != "end":
         task_number = str(input("Введите 'continue' что-бы продолжить проверку, или 'end' что-бы завершить: "))
         if task_number != "continue" and task_number != "end":
-            print("Ви вказали неправильну команду, спробуйте ще!")
+            print("Вы указали не правильную команду, попробуйте ещё!")
         elif task_number == "end":
             trigger = "start1"
             print("Спасибо за проверку)")
