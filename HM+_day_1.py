@@ -89,10 +89,9 @@ while trigger == "start":
         print("\nЗадача 3")
         count_word = get_num_int("Укажите количество слов в предложении: ")
         sentence =""
-        for i in range(count_word):
-            word = input(f"Введите слово №{i + 1}: ")
+        for i in range(1, count_word + 1):
+            word = input(f"Введите слово №{i}: ")
             sentence = sentence + word + " "
-            i = i + 1
         print(sentence)
 
     while task_number != "continue" and task_number != "end":
