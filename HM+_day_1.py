@@ -1,3 +1,19 @@
+def get_num_float(word):
+    while True:
+        number = input(word)
+        try:
+            return (float(number))
+        except:
+            print("Ошибка, пробуй ещё раз ввести число")
+
+def get_num_int(word):
+    while True:
+        number = input(word)
+        try:
+            return (int(number))
+        except:
+            print("Ошибка, пробуй ещё раз ввести число")
+
 trigger = "start"
 while trigger == "start":
     print("""
@@ -8,7 +24,7 @@ while trigger == "start":
 Виведіть на екран результат кожного порівняння.
 Задача 3: Створіть змінну - результат конкатенації (складання) строк str1="Hello " и str2="world". 
 Виведіть на екран.\n""")
-    task_number = "0"
+    task_number = 0
     while task_number != "1" and task_number != "2" and task_number != "3":
         task_number = str(input("Введите номер задания: "))
         if task_number != "1" and task_number != "2" and task_number != "3":
@@ -17,8 +33,8 @@ while trigger == "start":
     if task_number == "1" or task_number == "2":
         print(f"Введите, пожалуйста, числа для задания №{task_number} "
               "(пожалуйста, укажите числа, так как не смог реализовать контроль типа данных)")
-        first_number = int(input(f"Укажите первое число: "))
-        second_number = int(input(f"Укажите второе число: "))
+        first_number = get_num_float("Укажите первое число: ")
+        second_number = get_num_float("Укажите второе число: ")
 
     # First task
     if task_number == "1":
@@ -67,15 +83,18 @@ while trigger == "start":
         print(f"{first_number} == {second_number} - {task_number}")
         task_number = first_number != second_number
         print(f"{first_number} != {second_number} - {task_number}")
+
+    #Third task
     else:
         print("\nЗадача 3")
-        count_word = int(input("Укажите количество слов в предложении: "))
-        sentence = ""
+        count_word = get_num_int("Укажите количество слов в предложении: ")
+        sentence =""
         for i in range(count_word):
             word = input(f"Введите слово №{i + 1}: ")
             sentence = sentence + word + " "
             i = i + 1
         print(sentence)
+
     while task_number != "continue" and task_number != "end":
         task_number = str(input("Введите 'continue' что-бы продолжить проверку, или 'end' что-бы завершить: "))
         if task_number != "continue" and task_number != "end":
