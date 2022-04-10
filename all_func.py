@@ -1,3 +1,4 @@
+#Получение переменной опраделённого типа
 def get_anyType(word, search_type):
     if search_type == "float":
         while True:
@@ -18,11 +19,12 @@ def get_anyType(word, search_type):
     elif search_type == "str_only_words":
         while True:
             my_str = input(word)
+            if my_str.isalpha() and not " " in my_str:
+                return my_str
+            else:
+                print("Ошибка, пробуй ещё раз ввести данные (слово без цифр)")
 
-
-
-
-
+#Проверка числа на палиндром
 def check_palindrome(num):
     num = str(num)
     left_bord = ""
@@ -46,3 +48,37 @@ def check_palindrome(num):
             else:
                 centre += num[i]
         return left_bord == right_bord
+
+#Проверка входит ли слово в определённый список
+def check_one_in_list(word, list_word):
+    for i in list_word:
+        if i == word:
+            return True
+    return False
+
+#Логин пользователя (ключ словаря - логин, первый пункт списка - пароль)
+def check_user_login(user_list):
+    while True:
+        user_login = str(input("Введите ваш логин: "))
+        if user_login == "registry":
+            return user_login
+        user_password = str(input("Введите ваш пароль: "))
+        try:
+            if user_list[user_login][0] == user_password:
+                return user_login
+            else:
+                print("Не верный пароль, попробуй ещё")
+
+        except:
+            print("Не верный логин, попробуй ещё или введи в поле логина (registry) для регистрации")
+
+#Удаление пунка в словаре
+def delete_tile_list(delete_tile,list):
+    result_list={}
+    if delete_tile in list:
+        for tile in list:
+            if delete_tile != tile:
+                result_list.update({tile:list[tile]})
+        return result_list
+    else:
+        print ("Нет такого фильма в списке")
