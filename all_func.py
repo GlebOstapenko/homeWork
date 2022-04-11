@@ -22,7 +22,7 @@ def get_any_type(word, search_type):
             if my_str.isalpha() and not " " in my_str:
                 return my_str
             else:
-                print("Ошибка, пробуй ещё раз ввести данные (слово без цифр)")
+                print("Ошибка, пробуй ещё раз ввести данные (слово без цифр, символов или пробелов)")
 
 
 # Проверка числа на палиндром
