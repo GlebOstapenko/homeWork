@@ -5,7 +5,6 @@ user_list = {"admin": ["qwert1234", "Gleb", "Ostapenko", 22],
 
 film_list = {"Avengers": ["Длительность в минутах - 143", "Возрастное ограничение - 12 лет", 12],
              "Saw": ["Длительность в минутах - 103", "Возрастное ограничение - 18 лет", 18]}
-all_func.check_list(film_list, 2)
 while True:
     # Login===============================================
     user_login = ""
@@ -76,7 +75,7 @@ exit - выйти из аккаунта админа
                     if age_limit < 65 and age_limit > 0:
                         break
                     else:
-                        print("Для кого этот фильм? Поставь нормальный возрат")
+                        print("Для кого этот фильм? Поставь нормальный возрат ( < 65 лет)")
                 film_list.update({new_film: [f"Длительность в минутах - {film_duration}",
                                              f"Возрастное ограничение - {age_limit} лет", age_limit]})
 
@@ -121,7 +120,7 @@ age - возрастное ограничение
                         if new_age < 65 and new_age > 0:
                             break
                         else:
-                            print("Для кого этот фильм? Поставь нормальный возрат")
+                            print("Для кого этот фильм? Поставь нормальный возрат ( < 65 лет)")
                     film_list[correct_film][1] = f"Возрастное ограничение - {new_age} лет"
                     film_list[correct_film][2] = new_age
             else:
@@ -154,14 +153,14 @@ exit - выйти из аккаунта
                     else:
                         print("Нет такого фильма, попробуй ещё")
 
-                if (user_list[user_login][3] < 7):
+                if user_list[user_login][3] < 7:
                     print("Где твои родители?")
-                elif (user_list[user_login][3] < film_list[film][2]):
+                elif user_list[user_login][3] < film_list[film][2]:
                     if all_func.check_palindrome(user_list[user_login][3]):
                         print("Какой прекрасный возвраст, но это фильм для взрослых!")
                     else:
                         print("Это фильм для взрослых!")
-                elif (user_list[user_login][3] >= 65):
+                elif user_list[user_login][3] >= 65:
                     if user_list[user_login][3] > 122:
                         print("По вам книга рекордов Гинесса плачет")
                     if all_func.check_palindrome(user_list[user_login][3]):
