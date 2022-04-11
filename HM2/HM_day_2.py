@@ -10,6 +10,7 @@ import all_func
 
 
 while True:
+    buyer_age = 0
     while True:
         buyer_age = all_func.get_any_type("Укажите ваш возраст: ", "int")
         if buyer_age < 0:
