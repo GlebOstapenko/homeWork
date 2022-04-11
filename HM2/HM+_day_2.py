@@ -9,7 +9,7 @@ while True:
     # Login===============================================
     user_login = ""
     while True:
-        user_login = all_func.get_anyType("""Желаете пройти регистрацию, или залогиниться в существующий аккаунт?
+        user_login = all_func.get_any_type("""Желаете пройти регистрацию, или залогиниться в существующий аккаунт?
 login - для авторизации
 registry - для регистрации
 exit - завершить программу
@@ -34,9 +34,9 @@ exit - завершить программу
                 else:
                     break
             new_user[0] = input("Введите пароль для нового аккаунта: ")
-            new_user[1] = all_func.get_anyType("Введите ваше имя: ", "str_only_words").capitalize()
-            new_user[2] = all_func.get_anyType("Введите вашу фамилию: ", "str_only_words").capitalize()
-            new_user[3] = all_func.get_anyType("Введите ваш возраст: ", 'int')
+            new_user[1] = all_func.get_any_type("Введите ваше имя: ", "str_only_words").capitalize()
+            new_user[2] = all_func.get_any_type("Введите вашу фамилию: ", "str_only_words").capitalize()
+            new_user[3] = all_func.get_any_type("Введите ваш возраст: ", 'int')
             user_list.update({user_login: new_user})
             break
 
@@ -45,7 +45,7 @@ exit - завершить программу
         admin_act = ""
         while True:
             while True:
-                admin_act = all_func.get_anyType("""Укажите, необходимые действия:
+                admin_act = all_func.get_any_type("""Укажите, необходимые действия:
 check - просмотретть весь список фильмов
 add - добавить фильм
 delete - удалить фильм
@@ -61,17 +61,17 @@ exit - выйти из аккаунта админа
                 print("=================================")
                 break
             elif admin_act == "add":
-                new_film = all_func.get_anyType("Введите название нового фильма: ", "str_only_words").capitalize()
+                new_film = all_func.get_any_type("Введите название нового фильма: ", "str_only_words").capitalize()
                 film_duration = 0
                 while True:
-                    film_duration = all_func.get_anyType("Введите длительность фильма в минутах: ", "int")
+                    film_duration = all_func.get_any_type("Введите длительность фильма в минутах: ", "int")
                     if film_duration > 0:
                         break
                     else:
                         print("Фильм с отрицательным временем не может быть")
                 age_limit = 0
                 while True:
-                    age_limit = all_func.get_anyType("Введите возрастное ограничение фильма: ", "int")
+                    age_limit = all_func.get_any_type("Введите возрастное ограничение фильма: ", "int")
                     if age_limit < 65 and age_limit > 0:
                         break
                     else:
@@ -80,22 +80,22 @@ exit - выйти из аккаунта админа
                                              f"Возрастное ограничение - {age_limit} лет", age_limit]})
 
             elif admin_act == "delete":
-                admin_act = all_func.get_anyType("Введите название фильма который нужно удалить: ",
-                                                 "str_only_words").capitalize()
+                admin_act = all_func.get_any_type("Введите название фильма который нужно удалить: ",
+                                                  "str_only_words").capitalize()
                 film_list = all_func.delete_tile_list(admin_act, film_list)
                 print(f"Фильм {admin_act} успешно удалён")
 
             elif admin_act == "correct":
                 while True:
-                    correct_film = all_func.get_anyType("Введите название фильма для корректировки: ",
-                                                        "str_only_words").capitalize()
+                    correct_film = all_func.get_any_type("Введите название фильма для корректировки: ",
+                                                         "str_only_words").capitalize()
                     if correct_film in film_list:
                         break
                     else:
                         print("Такого фильма нет в системе, попробуй ещё")
 
                 while True:
-                    admin_act = all_func.get_anyType("""Поле доступные для редактирования:
+                    admin_act = all_func.get_any_type("""Поле доступные для редактирования:
 time - длительность фильма
 age - возрастное ограничение
 Введите необходимы параметр для изменения:""", "str_only_words")
@@ -107,7 +107,7 @@ age - возрастное ограничение
                 if admin_act == "time":
                     new_time = 0
                     while True:
-                        new_time = all_func.get_anyType("Укажите новую длительность сеанса: ", "int")
+                        new_time = all_func.get_any_type("Укажите новую длительность сеанса: ", "int")
                         if new_time > 0:
                             break
                         else:
@@ -116,7 +116,7 @@ age - возрастное ограничение
                 else:
                     new_age = 0
                     while True:
-                        new_age = all_func.get_anyType("Укажите укажите новое возратсное ограничение:  ", "int")
+                        new_age = all_func.get_any_type("Укажите укажите новое возратсное ограничение:  ", "int")
                         if new_age < 65 and new_age > 0:
                             break
                         else:
@@ -131,7 +131,7 @@ age - возрастное ограничение
         user_action = ""
         while True:
             while True:
-                user_action = all_func.get_anyType("""Доступные действия 
+                user_action = all_func.get_any_type("""Доступные действия 
 check - просмотреть список фильмов
 buy - купить билет
 exit - выйти из аккаунта
@@ -147,7 +147,7 @@ exit - выйти из аккаунта
                 break
             else:
                 while True:
-                    film = all_func.get_anyType("Введите название фильма: ", "str_only_words").capitalize()
+                    film = all_func.get_any_type("Введите название фильма: ", "str_only_words").capitalize()
                     if film in film_list:
                         break
                     else:
