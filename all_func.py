@@ -87,9 +87,6 @@ def check_list(checking, available_information):
         print("=========================")
 
 
-d = {1: 2, 2: 3, 3: 4}
-print(d.items())
-d.pop(1)
-print(d.items())
+
 
 
