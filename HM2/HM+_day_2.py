@@ -36,7 +36,12 @@ exit - завершить программу
             new_user[0] = input("Введите пароль для нового аккаунта: ")
             new_user[1] = all_func.get_any_type("Введите ваше имя: ", "str_only_words").capitalize()
             new_user[2] = all_func.get_any_type("Введите вашу фамилию: ", "str_only_words").capitalize()
-            new_user[3] = all_func.get_any_type("Введите ваш возраст: ", 'int')
+            while True:
+                new_user[3] = all_func.get_any_type("Введите ваш возраст: ", 'int')
+                if new_user[3] < 0:
+                    print("Как ты растёшь в минус?) Укажи, пожалуйста, адекватный возраст")
+                else:
+                    break
             user_list.update({user_login: new_user})
             break
 
