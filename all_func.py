@@ -82,3 +82,11 @@ def delete_tile_list(delete_tile,list):
         return result_list
     else:
         print ("Нет такого фильма в списке")
+
+def check_list(list,available_information):
+    print("=========================")
+    for keys in list:
+        print(keys)
+        for i in range(available_information):
+            print(list[keys][i])
+        print("=========================")

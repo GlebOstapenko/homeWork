@@ -3,9 +3,9 @@ import all_func
 user_list = {"admin": ["qwert1234", "Gleb", "Ostapenko", 22],
              "user": ["qwert", "Daniel", "Kronov", 15]}
 
-film_list = {"Avengers": [143, 12],
-             "Saw": [103, 18]}
-
+film_list = {"Avengers": ["Длительность в минутах - 143", "Возрастное ограничение - 12 лет", 12],
+             "Saw": ["Длительность в минутах - 103", "Возрастное ограничение - 18 лет", 18]}
+all_func.check_list(film_list, 2)
 while True:
     # Login===============================================
     user_login = ""
@@ -13,11 +13,14 @@ while True:
         user_login = all_func.get_anyType("""Желаете пройти регистрацию, или залогиниться в существующий аккаунт?
 login - для авторизации
 registry - для регистрации
+exit - завершить программу
 Введите команду: """, "str_only_words")
-        if all_func.check_one_in_list(user_login, ["login", "registry"]):
+        if all_func.check_one_in_list(user_login, ["login", "registry", "exit"]):
             break
         else:
             print("Неизвестная команда, попробуйте ещё раз!\n")
+    if user_login == "exit":
+        break
     while True:
         if user_login == "login":
             user_login = all_func.check_user_login(user_list)
@@ -37,13 +40,14 @@ registry - для регистрации
             new_user[3] = all_func.get_anyType("Введите ваш возраст: ", 'int')
             user_list.update({user_login: new_user})
             break
+
+    # Admin===============================================================================================
     if user_login == "admin":
         admin_act = ""
         while True:
             while True:
                 admin_act = all_func.get_anyType("""Укажите, необходимые действия:
-checkFilm - просмотретть весь список фильмов
-checkUser - посмотреть список порльзователей
+check - просмотретть весь список фильмов
 add - добавить фильм
 delete - удалить фильм
 correct - изменить информацию о фильме
@@ -55,16 +59,117 @@ exit - выйти из аккаунта админа
                 else:
                     print("Неизвестная команда, попробуйте ещё раз!\n")
             if admin_act == "exit":
+                print("=================================")
                 break
             elif admin_act == "add":
                 new_film = all_func.get_anyType("Введите название нового фильма: ", "str_only_words").capitalize()
-                film_duration = all_func.get_anyType("Введите длительность фильма в минутах: ", "int")
-                age_limit = all_func.get_anyType("Введите возрастное ограничение фильма: ", "int")
-                film_list.update({new_film:[film_duration,age_limit]})
+                film_duration = 0
+                while True:
+                    film_duration = all_func.get_anyType("Введите длительность фильма в минутах: ", "int")
+                    if film_duration > 0:
+                        break
+                    else:
+                        print("Фильм с отрицательным временем не может быть")
+                age_limit = 0
+                while True:
+                    age_limit = all_func.get_anyType("Введите возрастное ограничение фильма: ", "int")
+                    if age_limit < 65 and age_limit > 0:
+                        break
+                    else:
+                        print("Для кого этот фильм? Поставь нормальный возрат")
+                film_list.update({new_film: [f"Длительность в минутах - {film_duration}",
+                                             f"Возрастное ограничение - {age_limit} лет", age_limit]})
+
             elif admin_act == "delete":
                 admin_act = all_func.get_anyType("Введите название фильма который нужно удалить: ",
                                                  "str_only_words").capitalize()
-                film_list = all_func.delete_tile_list(admin_act,film_list)
+                film_list = all_func.delete_tile_list(admin_act, film_list)
                 print(f"Фильм {admin_act} успешно удалён")
 
+            elif admin_act == "correct":
+                while True:
+                    correct_film = all_func.get_anyType("Введите название фильма для корректировки: ",
+                                                        "str_only_words").capitalize()
+                    if correct_film in film_list:
+                        break
+                    else:
+                        print("Такого фильма нет в системе, попробуй ещё")
 
+                while True:
+                    admin_act = all_func.get_anyType("""Поле доступные для редактирования:
+time - длительность фильма
+age - возрастное ограничение
+Введите необходимы параметр для изменения:""", "str_only_words")
+                    if all_func.check_one_in_list(admin_act, ["time", "age"]):
+                        break
+                    else:
+                        print("Неизвестная команда, попробуйте ещё раз!\n")
+
+                if admin_act == "time":
+                    new_time = 0
+                    while True:
+                        new_time = all_func.get_anyType("Укажите новую длительность сеанса: ", "int")
+                        if new_time > 0:
+                            break
+                        else:
+                            print("Фильм с отрицательным временем не может быть")
+                    film_list[correct_film][0] = f"Длительность в минутах - {new_time}"
+                else:
+                    new_age = 0
+                    while True:
+                        new_age = all_func.get_anyType("Укажите укажите новое возратсное ограничение:  ", "int")
+                        if new_age < 65 and new_age > 0:
+                            break
+                        else:
+                            print("Для кого этот фильм? Поставь нормальный возрат")
+                    film_list[correct_film][1] = f"Возрастное ограничение - {new_age} лет"
+                    film_list[correct_film][2] = new_age
+            else:
+                all_func.check_list(film_list, 2)
+
+    # USER=============================================================================
+    else:
+        user_action = ""
+        while True:
+            while True:
+                user_action = all_func.get_anyType("""Доступные действия 
+check - просмотреть список фильмов
+buy - купить билет
+exit - выйти из аккаунта
+Выберите необходимое дейтсиве: """, "str_only_words")
+                if all_func.check_one_in_list(user_action, ["check", "buy", "exit"]):
+                    break
+                else:
+                    print("Неизвестная команда, попробуйте ещё раз!\n")
+
+            if user_action == "check":
+                all_func.check_list(film_list, 2)
+            elif user_action == "exit":
+                break
+            else:
+                while True:
+                    film = all_func.get_anyType("Введите название фильма: ", "str_only_words").capitalize()
+                    if film in film_list:
+                        break
+                    else:
+                        print("Нет такого фильма, попробуй ещё")
+
+                if (user_list[user_login][3] < 7):
+                    print("Где твои родители?")
+                elif (user_list[user_login][3] < film_list[film][2]):
+                    if all_func.check_palindrome(user_list[user_login][3]):
+                        print("Какой прекрасный возвраст, но это фильм для взрослых!")
+                    else:
+                        print("Это фильм для взрослых!")
+                elif (user_list[user_login][3] >= 65):
+                    if user_list[user_login][3] > 122:
+                        print("По вам книга рекордов Гинесса плачет")
+                    if all_func.check_palindrome(user_list[user_login][3]):
+                        print("У вас прекрасный возвраст, пожалуйста, покажите пенсионное удостоверение!")
+                    else:
+                        print("Пожалуйста, покажите пенсионное удостоверение!")
+                else:
+                    if all_func.check_palindrome(user_list[user_login][3]):
+                        print("У вас прекрасный возвраст, но нужно было приходить раньше, билетов больше нет!")
+                    else:
+                        print("Нужно было приходить раньше, билетов больше нет!")
