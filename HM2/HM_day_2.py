@@ -10,7 +10,13 @@ import all_func
 
 
 while True:
-    buyer_age = all_func.get_any_type("Укажите ваш возраст: ", "int")
+    while True:
+        buyer_age = all_func.get_any_type("Укажите ваш возраст: ", "int")
+        if buyer_age < 0:
+            print("Как ты растёшь в минус?) Укажи, пожалуйста, адекватный возраст")
+        else:
+            break
+
     if buyer_age < 7:
         print("Где твои родители?")
     elif buyer_age < 16:
