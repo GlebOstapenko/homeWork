@@ -10,7 +10,7 @@ import all_func
 
 
 while True:
-    buyer_age = all_func.get_anyType("Укажите ваш возраст: ", "int")
+    buyer_age = all_func.get_any_type("Укажите ваш возраст: ", "int")
     if buyer_age < 7:
         print("Где твои родители?")
     elif buyer_age < 16:
