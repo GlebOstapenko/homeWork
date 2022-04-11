@@ -11,14 +11,14 @@ import all_func
 
 while True:
     buyer_age = all_func.get_anyType("Укажите ваш возраст: ", "int")
-    if (buyer_age < 7):
+    if buyer_age < 7:
         print("Где твои родители?")
-    elif (buyer_age < 16):
+    elif buyer_age < 16:
         if all_func.check_palindrome(buyer_age):
             print("Какой прекрасный возвраст, но это фильм для взрослых!")
         else:
             print("Это фильм для взрослых!")
-    elif (buyer_age >= 65):
+    elif buyer_age >= 65:
         if buyer_age > 122:
             print("По вам книга рекордов Гинесса плачет")
         if all_func.check_palindrome(buyer_age):
