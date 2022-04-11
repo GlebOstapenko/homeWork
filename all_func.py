@@ -77,21 +77,22 @@ def check_user_login(user_list):
 
 
 # Удаление пунка в словаре
-def delete_tile_list(delete_tile, list):
+def delete_tile_list(delete_tile, correct_list):
     result_list = {}
-    if delete_tile in list:
-        for tile in list:
+    if delete_tile in correct_list:
+        for tile in correct_list:
             if delete_tile != tile:
-                result_list.update({tile: list[tile]})
+                result_list.update({tile: correct_list[tile]})
         return result_list
     else:
         print("Нет такого фильма в списке")
 
 
-def check_list(list, available_information):
+# Выведение словаря в виде списка (available_information - допустимая информация для отображения)
+def check_list(checking, available_information):
     print("=========================")
-    for keys in list:
+    for keys in checking:
         print(keys)
         for i in range(available_information):
-            print(list[keys][i])
+            print(checking[keys][i])
         print("=========================")
