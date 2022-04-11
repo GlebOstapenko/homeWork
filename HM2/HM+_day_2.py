@@ -80,10 +80,16 @@ exit - выйти из аккаунта админа
                                              f"Возрастное ограничение - {age_limit} лет", age_limit]})
 
             elif admin_act == "delete":
-                admin_act = all_func.get_any_type("Введите название фильма который нужно удалить: ",
-                                                  "str_only_words").capitalize()
-                film_list = all_func.delete_tile_list(admin_act, film_list)
-                print(f"Фильм {admin_act} успешно удалён")
+                while True:
+                    admin_act = all_func.get_any_type("Введите название фильма который нужно удалить: ",
+                                                      "str_only_words").capitalize()
+                    if admin_act in film_list:
+                        film_list.pop(admin_act)
+                        print(f"Фильм {admin_act} успешно удалён")
+                        break
+                    else:
+                        print("Нет такого фильма в списке")
+
 
             elif admin_act == "correct":
                 while True:
