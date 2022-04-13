@@ -1,3 +1,10 @@
+import random
+import string
+from rich.console import Console
+
+console = Console()
+
+
 # Получение переменной опраделённого типа
 def get_any_type(word, search_type):
     if search_type == "float":
@@ -59,6 +66,16 @@ def check_one_in_list(word, list_word):
     return False
 
 
+# Проверка входит ли слово в определённый список 2.0
+def new_check_one_in_list(word, list_word, error_message):
+    while True:
+        check_word = console.input(word).lower()
+        if check_one_in_list(check_word, list_word):
+            return check_word
+        else:
+            print(error_message)
+
+
 # Логин пользователя (ключ словаря - логин, первый пункт списка - пароль)
 def check_user_login(user_list):
     while True:
@@ -76,9 +93,8 @@ def check_user_login(user_list):
             print("Не верный логин, попробуй ещё или введи в поле логина (registry) для регистрации")
 
 
-
 # Выведение словаря в виде списка (available_information - допустимая информация для отображения)
-def check_list(checking, available_information):
+def check_dict(checking, available_information):
     print("=========================")
     for keys in checking:
         print(keys)
@@ -87,6 +103,67 @@ def check_list(checking, available_information):
         print("=========================")
 
 
+# Создание списка (create_type - тип создания списка "full_rand","type_rand","value_rand","manual")
+def create_list(create_type):
+    length = get_any_type("Введіть потрібний розмір для списку: ", "int")
+    result_list = []
+    for i in range(length):
+        if create_type == "type_rand" or create_type == "full_rand":
+            variable_type = random.choice(["int", "str", "float", "bool"])
+        else:
+            variable_type = new_check_one_in_list("""Доступні типи "int", "str", "float", "bool".
+Вкажіть тип змінної: """, ["int", "str", "float", "bool"], "Вказано не вірний тип, спробуй ще")
+
+        if variable_type == "int":
+            if create_type == "value_rand" or create_type == "full_rand":
+                result_list.append(random.randint(0, 100))
+            else:
+                result_list.append(get_any_type("Введіть ціле число: ", "int"))
+
+        elif variable_type == "str":
+            if create_type == "value_rand" or create_type == "full_rand":
+                letters = string.ascii_lowercase
+                rand_length = random.randint(0, 10)
+                word = ""
+                for i in range(rand_length):
+                    word += random.choice(letters)
+                result_list.append(word)
+            else:
+                result_list.append(input("Введіть значення для строки: "))
+
+        elif variable_type == "float":
+            if create_type == "value_rand" or create_type == "full_rand":
+                result_list.append(random.uniform(0, 10))
+            else:
+                result_list.append(get_any_type("Введіть число з цифрою після крапки (float): ", "float"))
+
+        else:
+            if create_type == "value_rand" or create_type == "full_rand":
+                result_list.append(bool(random.randint(0, 1)))
+            else:
+                result_list.append(
+                    bool(input("Введіть будь-яке значення для True, просто натисніть 'Enter' для False: ")))
+    return result_list
 
 
+# Создание из одного списка, списка с определённым типом данных
+def list_one_type(list_type, check_list):
+    if list_type == "int":
+        list_type = int
+    elif list_type == "str":
+        list_type = str
+    elif list_type == "float":
+        list_type = float
+    elif list_type == "bool":
+        list_type = bool
+    result_list = []
+    for tile in check_list:
+        if type(tile) == list_type:
+            result_list.append(tile)
+    return result_list
 
+
+# Список на экран в формате (Данные - тип данных)
+def print_list_and_type(check_list):
+    for tile in check_list:
+        print(f"{tile} - {type(tile)}")

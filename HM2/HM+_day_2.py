@@ -135,7 +135,7 @@ age - возрастное ограничение
                     film_list[correct_film][1] = f"Возрастное ограничение - {new_age} лет"
                     film_list[correct_film][2] = new_age
             else:
-                all_func.check_list(film_list, 2)
+                all_func.check_dict(film_list, 2)
 
     # USER=============================================================================
     else:
@@ -153,7 +153,7 @@ exit - выйти из аккаунта
                     print("Неизвестная команда, попробуйте ещё раз!\n")
 
             if user_action == "check":
-                all_func.check_list(film_list, 2)
+                all_func.check_dict(film_list, 2)
             elif user_action == "exit":
                 break
             else:
