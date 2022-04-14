@@ -1,4 +1,5 @@
 from rich.console import Console
+from rich.console import Style
 console = Console()
 task_list = """
 1) Зформуйте строку, яка містить певну інформацію про символ в відомому слові. 
@@ -14,24 +15,34 @@ task_list = """
 Майте на увазі, що данні в lst1 не є статичними можуть змінюватись від запуску до запуску.
 ==========================================================================================================="""
 
-task_number = "[green]Введіть номер завдання для перевірки або 'exit' для завершення перевірки дз: [/green]"
+# Menu
+task_number = "[blue]Введіть [yellow]номер[/] завдання для перевірки або '[yellow]exit[/]' для завершення перевірки дз: [/blue]"
 task_check = ["1", "2", "3", "exit"]
-command_error = "Невідома команда, повтори спробу!!!"
-task_continue = ["Для продовження перевірки 'continue', для завершення 'exit': ",["continue", "exit"]]
+command_error = "[red]Невідома команда, повтори спробу!!![/red]"
+task_continue = ["[blue]Для продовження перевірки '[yellow]continue[/]', для завершення '[yellow]exit[/]': [/blue]",
+                 ["continue", "exit"]]
+thanks_check = "[green]Дякую за перевірку! [/green]"
 
-create_list = """Список доступних методів створення списку
-full_rand - цілком випадкова генерація списку
-type_rand - випадкове визначення типу даних у кожному пункті списку, але ручне заповнення
-value_rand - випадкове наповнення списку, ручна вказівка типу даних
-manual - повністю ручний список
-Виберіть тип: """
-type_list = ["full_rand","type_rand","value_rand","manual"]
+# Task1
+task_one_word = "[blue]Вкажіть [yellow]слово[/yellow] для першого завдання: [/blue]"
+task_one_num = "[blue]Вкажіть [yellow]номер[/yellow] літери яку необхідно знайти: [/blue]"
+task_one_error = f"[red]Не коректне число (більше довжини слова або менше 0)[/red]"
 
-search_type = ["""Дані для формування списку
-int - список цілих чисел
-str - список рядків
-float - список чисел з цифрою після коми
-bool - список із логічних частин списку
-all - зробити списки по кожному окремому типу даних
-Виберіть тип списку: """,["int", "str", "float", "bool","all"]]
+# Task2
+task_second_word = "[blue]Введіть ваше [yellow]речення[/yellow] для перевірки: [/blue]"
 
+# Task3
+create_list = """[blue]Список доступних методів створення списку
+[yellow]full_rand[/yellow] - цілком випадкова генерація списку
+[yellow]type_rand[/yellow] - випадкове визначення типу даних у кожному пункті списку, але ручне заповнення
+[yellow]value_rand[/yellow] - випадкове наповнення списку, ручна вказівка типу даних
+[yellow]manual[/yellow] - повністю ручний список
+Виберіть тип: [/blue]"""
+type_list = ["full_rand", "type_rand", "value_rand", "manual"]
+search_type = ["""[blue]Дані для формування списку
+[yellow]int[/yellow] - список цілих чисел
+[yellow]str[/yellow] - список рядків
+[yellow]float[/yellow] - список чисел з цифрою після коми
+[yellow]bool[/yellow] - список із логічних частин списку
+Виберіть тип списку: [/blue]""", ["int", "str", "float", "bool"]]
+task_third_result = "[green]Ваш новый список список с типом float"
