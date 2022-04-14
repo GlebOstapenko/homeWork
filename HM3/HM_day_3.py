@@ -43,7 +43,9 @@ while True:
                                                          source.command_error)
             if task_number == "exit":
                 break
-
+# Завдання 3
+# all_func.create_list(type_list) - створюе список
+# all_func.list_one_type(user_type, task_third_list) - робить список з тыпом данных по запиту
     elif task_number == "3":
         while True:
             type_list = all_func.new_check_one_in_list(source.create_list, source.type_list, source.command_error)
@@ -54,7 +56,7 @@ while True:
             user_type = all_func.new_check_one_in_list(source.search_type[0], source.search_type[1],
                                                        source.command_error)
             result_list = all_func.list_one_type(user_type, task_third_list)
-            console.print(f"[green]Ваш новий список з типом[/green] [blue]{user_type}[/blue]")
+            console.print(f"[green]Ваш новий список з типом[/green] '[blue]{user_type}[/blue]'")
             all_func.print_list_and_type(result_list)
             task_number = all_func.new_check_one_in_list(source.task_continue[0], source.task_continue[1],
                                                          source.command_error)

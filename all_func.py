@@ -180,6 +180,9 @@ def list_one_type(list_type, check_list):
 
 # Список на экран в формате (Данные - тип данных)
 def print_list_and_type(check_list):
-    for tile in check_list:
-        result_type = str(type(tile))
-        console.print(f"[blue]{tile}[green] - тип ячейки [/green]{result_type[8:-2]}[/blue]")
+    if len(check_list)==0:
+        console.print("[red]Список порожній[/]")
+    else:
+        for tile in check_list:
+            result_type = str(type(tile))
+            console.print(f"[blue]{tile}[green] - тип ячейки [/green]{result_type[8:-2]}[/blue]")
