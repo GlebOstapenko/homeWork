@@ -5,11 +5,9 @@ import re
 кількість слів, які містять дві голосні літери підряд.
 """
 
-task_str = input("Введіть рядок для перевірки: ")
-task_str = re.split(" ", task_str)
+task_str = re.split(" ", input("Введіть рядок для перевірки: "))
 vowels_lst = "aeiouyауоыиэяюёеаоуеиі"
 result_count = 0
-res_list = []
 for word in task_str:
     word = filter(str.isalpha, word)
     word = "".join(word)
@@ -22,7 +20,6 @@ for word in task_str:
                 check_count = 0
             if check_count == 2:
                 result_count += 1
-                res_list.append(word)
                 break
 print(f"Кількість слів із двома голосними літерами - {result_count}")
 
