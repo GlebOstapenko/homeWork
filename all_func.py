@@ -35,6 +35,7 @@ def get_any_type(word, search_type):
                               style=error_style)
 
 
+
 # Проверка числа на палиндром
 def check_palindrome(num):
     num = str(num)
