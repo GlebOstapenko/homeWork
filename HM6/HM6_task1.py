@@ -3,6 +3,5 @@ def get_type_variable(variable):
     print(f"Тип вашої змінної - {result}")
 
 
-
 var = (222)
 get_type_variable(var)

@@ -2,12 +2,11 @@ def task3(variable1, variable2):
     if type(variable1) == int and type(variable2) == int:
         return task3_numbers(variable1, variable2)
     elif type(variable1) == str and type(variable2) == str:
-        return task3_string(variable1,variable2)
+        return task3_string(variable1, variable2)
     elif type(variable1) == str:
-        return task3_dict(variable1,variable2)
+        return task3_dict(variable1, variable2)
     else:
-        return task3_other_type(variable1,variable2)
-
+        return task3_other_type(variable1, variable2)
 
 
 def task3_numbers(number1, number2):
@@ -37,8 +36,8 @@ def task3_other_type(variable1, variable2):
     return result
 
 
-task3(2,2)
-task3("2","2")
-task3("2",2)
-task3(2,"2")
+task3(2, 2)
+task3("2", "2")
+task3("2", 2)
+task3(2, "2")
 print(type(task3([2], {2})))
