@@ -15,7 +15,7 @@ def get_any_type(word, search_type):
             try:
                 return float(my_number)
             except:
-                console.print("Помилка, спробуй ще раз ввести число", style=error_style)
+                console.print("Помилка, спробуй ще раз ввести число")
 
     elif search_type == "int":
         while True:
