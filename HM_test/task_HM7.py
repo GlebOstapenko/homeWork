@@ -20,9 +20,9 @@ def get_age_form(age):
     :return: Повертає корректне значеня віку
     """
     check_age = str(age)[-1]
-    if check_age == "1":
+    if check_age == "1" and age != 11:
         return "рік"
-    elif check_age in ["2", "3", "4"]:
+    elif check_age in ["2", "3", "4"] and not (age in [12, 13, 14]):
         return "роки"
     else:
         return "років"
@@ -40,7 +40,7 @@ def hm7_task(age):
         if check_palindrome(age):
             print(f"{age} {age_form} - це чудовий вік, але це фільм для дорослих!")
         else:
-            print(f"Тобі лише {age} {age_form}, а це е фільм для дорослих!")
+            print(f"Тобі лише {age} {age_form}, а це фільм для дорослих!")
     elif age >= 65:
         if check_palindrome(age):
             print(f"{age} {age_form} - це чудовий вік, будь ласка, покажіть пенсійне посвідчення!")

@@ -11,6 +11,6 @@ def test_check_palindrome(word, exp_result):
 print("\n")
 
 
-@pytest.mark.parametrize("age", [10, 1, 2, 3, 4, 11, 15, 147, 77, 66, 2.0])
+@pytest.mark.parametrize("age", [1, 11, 21, 2, 12, 22, 15, 147, 77, 66, 2.0])
 def test_hm7(age):
     task_HM7.hm7_task(age)
