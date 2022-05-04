@@ -1,5 +1,5 @@
 from HM7.all_func_HM7 import check_palindrome
-from HM7 import task_HM7
+from HM7.task_HM7 import hm7_task
 import pytest
 
 
@@ -8,9 +8,7 @@ def test_check_palindrome(word, exp_result):
     assert check_palindrome(word) == exp_result
 
 
-print("\n")
 
-
-@pytest.mark.parametrize("age", [1, 11, 21, 2, 12, 22, 15, 147, 77, 66, 2])
+@pytest.mark.parametrize("age", [1, 11, 21,  12, 22, 15, 147, 77, 66, 2])
 def test_hm7(age):
-    task_HM7.hm7_task(age)
+    hm7_task(age)
