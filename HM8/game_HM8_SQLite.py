@@ -1,17 +1,12 @@
 import sqlite3 as sql
 from game_func_rules import get_choice, get_computer_choice, check_winner
 from all_func import get_any_type
-from text import main_menu,res_menu
+from text import main_menu, res_menu
 
 
 def add_game_result(user_choice, computer_choice, result):
     with sql.connect("game.sqlite3") as con:
         cur = con.cursor()
-        cur.execute("""CREATE TABLE IF NOT EXISTS games_results (
-        user_choice TEXT,
-        computer_choice TEXT,
-        winner  TEXT
-        )""")
         new_result_info = (user_choice, computer_choice, result)
         cur.execute(f"INSERT INTO games_results VALUES(?, ?, ?)", new_result_info)
 
@@ -65,11 +60,14 @@ def get_results_for_choice(who_choice):
         return results
 
 
-
-
-
-
 if __name__ == '__main__':
+    with sql.connect("game.sqlite3") as con:
+        cur = con.cursor()
+        cur.execute("""CREATE TABLE IF NOT EXISTS games_results (
+        user_choice TEXT,
+        computer_choice TEXT,
+        winner  TEXT
+        )""")
     while True:
         print(main_menu)
         act_application = get_any_type("Введіть дію: ", "str_only_words")
@@ -88,4 +86,3 @@ if __name__ == '__main__':
                 get_results_for_choice(act_application)
         else:
             break
-
