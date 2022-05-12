@@ -1,8 +1,11 @@
 def args_to_str(func):
-    def replacing_with_string(*args):
+    def replacing_with_string(*args,**kwargs):
         args_string = []
         for arg in args:
             args_string.append(str(arg))
+        for kwarg in kwargs:
+            args_string.append(str(kwargs[kwarg]))
+
         return func(args_string)
     return replacing_with_string
 
@@ -13,4 +16,4 @@ def get_str(args):
     return result_str
 
 
-print(get_str(1,2,"52",4,"78",8))
+print(get_str(1,2,"52",4,"78",8, c=2, d=4))
