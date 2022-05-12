@@ -9,5 +9,3 @@ def get_type(arg_type):
 def get_str_len(my_str):
     return len(my_str)
 
-print(get_str_len({"s":1}))
-print(type(get_str_len(123456)))
