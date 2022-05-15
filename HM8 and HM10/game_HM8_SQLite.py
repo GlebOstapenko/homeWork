@@ -1,7 +1,9 @@
 import sqlite3 as sql
 from game_func import get_choice, get_computer_choice, check_winner
-from all_func import get_any_type
+from all_func import get_any_type, check_one_in_list
 from text import main_menu, res_menu
+from datetime import datetime
+from func_get_file import get_results_file
 
 
 def add_game_result(user_choice, computer_choice, result):
@@ -11,8 +13,10 @@ def add_game_result(user_choice, computer_choice, result):
      :param computer_choice: хід комп'ютера
      :param result: результат гри
      """
-    new_result_info = (user_choice, computer_choice, result)
-    cur.execute(f"INSERT INTO games_results VALUES(?, ?, ?)", new_result_info)
+    new_result_info = (user_choice, computer_choice, result, datetime.now())
+    cur.execute(f"INSERT INTO games_results VALUES(?, ?, ?, ?)", new_result_info)
+    print("----------")
+    con.commit()
 
 
 def my_game():
@@ -37,13 +41,16 @@ def output_db_info(func):
         if len(results) == 0:
             print("Нет информации по данному запросу")
         else:
-            print("User choice Computer choice Winner")
+            print("Game number User choice Computer choice Winner    Game datetime")
             for result in results:
-                user_choice = result[0] + (" " * (11 - len(result[0])))
-                computer_choice = result[1] + (" " * (15 - len(result[1])))
-                winner = result[2]
-                print(user_choice, computer_choice, winner)
-        print("=" * 36)
+                game_number = str(result[0]) + (" " * (11 - len(str(result[0]))))
+                user_choice = result[1] + (" " * (11 - len(result[1])))
+                computer_choice = result[2] + (" " * (15 - len(result[2])))
+                winner = result[3] + (" " * (9 - len(result[3])))
+                game_datetime = result[4]
+                print(game_number, user_choice, computer_choice, winner, game_datetime)
+        print("=" * 70)
+        return results
 
     return output
 
@@ -56,11 +63,12 @@ def get_results_list(type_results):
     """
 
     if type_results == "all":
-        cur.execute("SELECT * FROM games_results ")
+        cur.execute("SELECT rowid, * FROM games_results ")
         results = cur.fetchall()
+        print(type(results))
         return results
     else:
-        cur.execute(f"SELECT * FROM games_results WHERE winner == '{type_results}' ")
+        cur.execute(f"SELECT rowid, * FROM games_results WHERE winner == '{type_results}' ")
         results = cur.fetchall()
         return results
 
@@ -72,7 +80,7 @@ def get_results_for_choice(who_choice):
     :return: повертає список ігор у яких комп'ютер або гравець вибирали певний хід
     """
     search_choice = get_choice("search")
-    cur.execute(f"SELECT * FROM games_results WHERE {who_choice}_choice == '{search_choice}'")
+    cur.execute(f"SELECT rowid, * FROM games_results WHERE {who_choice}_choice == '{search_choice}'")
     results = cur.fetchall()
     return results
 
@@ -84,6 +92,7 @@ if __name__ == '__main__':
         user_choice TEXT,
         computer_choice TEXT,
         winner  TEXT
+        game_datetime TEXT
         )""")
     while True:
         print(main_menu)
@@ -94,12 +103,24 @@ if __name__ == '__main__':
             print(res_menu)
             act_application = get_any_type("Введіть дію: ", "str_only_words")
             if act_application == "all":
-                get_results_list(act_application)
+                result_list = get_results_list(act_application)
+                get_results_file(result_list, "all-game")
             elif act_application == "win":
-                act_application = get_any_type("Виберіть 'user' або 'computer': ", "str_only_words")
-                get_results_list(act_application)
+                while True:
+                    act_application = get_any_type("Виберіть 'user' або 'computer' або 'draw': ", "str_only_words")
+                    if act_application in ["user", "computer", "draw"]:
+                        break
+                    print("Не правильно, повтори спробу")
+                result_list = get_results_list(act_application)
+                get_results_file(result_list, f"{act_application}_wins")
             elif act_application == "cho":
-                act_application = get_any_type("Виберіть чий хід 'user' або 'computer': ", "str_only_words")
-                get_results_for_choice(act_application)
+                while True:
+                    act_application = get_any_type("Виберіть 'user' або 'computer': ", "str_only_words")
+                    if act_application in ["user", "computer"]:
+                        break
+                    print("Не правильно, повтори спробу")
+                result_list = get_results_for_choice(act_application)
+                get_results_file(result_list, f"{act_application}_choice")
+
         else:
             break
