@@ -48,12 +48,14 @@ class Plane(Vehicle):
     number_engines = 0
     maximum_flight_altitude = ""
     minimum_flight_altitude = ""
+    count_plane = 0
 
     def __init__(self, create_information):
         super(Plane, self).__init__(create_information)
         self.number_engines = create_information["number_engines"]
         self.maximum_flight_altitude = create_information["maximum_flight_altitude"]
         self.minimum_flight_altitude = create_information["minimum_flight_altitude"]
+        Plane.count_plane += 1
 
     def start_sound(self):
         print("Виуууу")
@@ -62,11 +64,13 @@ class Plane(Vehicle):
 class Ship(Vehicle):
     number_of_screws = 0
     ship_type = ""
+    count_ship = 0
 
     def __init__(self, create_information):
         super(Ship, self).__init__(create_information)
         self.number_of_screws = create_information["number_of_screws"]
         self.ship_type = create_information["ship_type"]
+        Ship.count_ship += 1
 
     def start_sound(self):
         print("ТуууТуууу")
