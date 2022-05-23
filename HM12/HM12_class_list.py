@@ -13,9 +13,9 @@ class Vehicle(ABC):
         for param, value in kwargs.items():
 
             try:
-                command_exec = f"self.{param} = {value}"
+                command_exec = f"self.{param} = {int(value)}"
                 exec(command_exec)
-            except NameError:
+            except ValueError:
                 print(f"{param} - може бути лише числовим значенням, [{value}] не підходить")
             except AttributeError:
                 print(f"Параметр {param} не в списку допустимих параметрів")

@@ -29,7 +29,10 @@ def my_game():
     add_game_result(user_choice, computer_choice, result)
 
 
+
 def output_db_info(func):
+
+
     """
     Декоратор який виводить в консоль результат функцій, які в свою чергу дістають з БД інформацію
     за певними фільтрами P.S. фільтри дивитись у функціях
