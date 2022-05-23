@@ -1,7 +1,7 @@
 from HM12_class_list import Car, Plane, Ship
 import inspect
 
-my_car = Car("scds", "sdcvs", engine_capacity= 3, max_speed= 9)
+my_car = Car("scds", "sdcvs", engine_capacity= 3, max_speed= 10)
 print("=================")
 my_car()
 my_car.start_sound()
