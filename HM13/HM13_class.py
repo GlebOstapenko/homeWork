@@ -3,7 +3,7 @@ from math import dist
 
 class Point:
 
-    def __init__(self, x, y, *args, **kwargs):
+    def __init__(self, x=0, y=0, *args, **kwargs):
         self.__point_x = self.check_point_type(x)
         self.__point_y = self.check_point_type(y)
 
@@ -32,7 +32,7 @@ class Point:
 
 
 class Line:
-    def __init__(self, a_point, b_point):
+    def __init__(self, a_point=Point(0, 0), b_point=Point(0, 0), *args, **kwargs):
         if not isinstance(a_point, Point) or not isinstance(b_point, Point):
             raise TypeError("Данные указаны не верно, необходимо указать елементы класса Point")
         self.__a_point = a_point
@@ -50,7 +50,7 @@ class Line:
 
 
 class Triangle:
-    def __init__(self, a_point, b_point, c_point):
+    def __init__(self, a_point=Point(0, 0), b_point=Point(0, 0), c_point=Point(0, 0), *args, **kwargs):
         if not isinstance(a_point, Point) or not isinstance(b_point, Point) or not isinstance(c_point, Point):
             raise TypeError("Данные указаны не верно, необходимо указать елементы класса Point")
         self.__a_point = a_point
@@ -71,7 +71,3 @@ class Triangle:
     @property
     def area(self):
         return self.__area
-
-
-
-
