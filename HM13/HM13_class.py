@@ -1,0 +1,87 @@
+from math import dist
+
+
+class Point:
+
+    def __init__(self, x, y, *args, **kwargs):
+        self.__point_x = self.check_point_type(x)
+        self.__point_y = self.check_point_type(y)
+
+    @classmethod
+    def check_point_type(cls, x):
+        try:
+            return int(x)
+        except:
+            raise TypeError("Кординаты могут быть только числовым значением")
+
+    @property
+    def point_x(self):
+        return self.__point_x
+
+    @point_x.setter
+    def point_x(self, x):
+        self.__point_x = self.check_point_type(x)
+
+    @property
+    def point_y(self):
+        return self.__point_y
+
+    @point_y.setter
+    def point_y(self, y):
+        self.__point_y = self.check_point_type(y)
+
+
+class Line:
+    def __init__(self, a_point, b_point):
+        if not isinstance(a_point, Point) or not isinstance(b_point, Point):
+            raise TypeError("Данные указаны не верно, необходимо указать елементы класса Point")
+        self.__a_point = a_point
+        self.__b_point = b_point
+        self.__length = self.get_length(self.__a_point, self.__b_point)
+
+    @classmethod
+    def get_length(cls, a_point, b_point):
+        length = dist([a_point.point_x, a_point.point_y], [b_point.point_x, b_point.point_y])
+        return length
+
+    @property
+    def length(self):
+        return self.__length
+
+
+class Triangle:
+    def __init__(self, a_point, b_point, c_point):
+        if not isinstance(a_point, Point) or not isinstance(b_point, Point) or not isinstance(c_point, Point):
+            raise TypeError("Данные указаны не верно, необходимо указать елементы класса Point")
+        self.__a_point = a_point
+        self.__b_point = b_point
+        self.__c_point = c_point
+        self.__ab_line = Line(self.__a_point, self.__b_point).length
+        self.__bc_line = Line(self.__b_point, self.__c_point).length
+        self.__ca_line = Line(self.__c_point, self.__a_point).length
+        self.__area = self.get_area(self.__ab_line, self.__bc_line, self.__ca_line)
+
+    @classmethod
+    def get_area(self, ab_line, bc_line, ca_line):
+        act1 = (ab_line + bc_line + ca_line) / 2
+        act2 = act1 * (act1 - ab_line) * (act1 - bc_line) * (act1 - ca_line)
+        area = act2 ** 0.5
+        return area
+
+    @property
+    def area(self):
+        return self.__area
+
+
+p1 = Point(1, 5)
+p2 = Point(10, 15)
+p3 = Point(15, 15)
+l1 = Line(p1, p2)
+print(l1.length)
+l2 = Line(p2, p3)
+print(l2.length)
+l3 = Line(p3, p1)
+print(l3.length)
+tr1 = Triangle(p1, p2, p3)
+print(tr1.area)
+
