@@ -1,11 +1,31 @@
 from math import dist
 
 
+class MyIter:
+    count = 0
+
+    def __init__(self, list, *args, **kwargs):
+        self.__my_list = list
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.count < len(self.__my_list):
+            self.count += 1
+            return self.__my_list[self.count-1]
+        else:
+            raise StopIteration
+
+
 class Point:
 
     def __init__(self, x=0, y=0, *args, **kwargs):
         self.__point_x = self.check_point_type(x)
         self.__point_y = self.check_point_type(y)
+
+    def __call__(self, *args, **kwargs):
+        return "x:{} y:{}".format(self.__point_x, self.__point_y)
 
     @classmethod
     def check_point_type(cls, x):
@@ -39,6 +59,10 @@ class Line:
         self.__b_point = b_point
         self.__length = self.get_length(self.__a_point, self.__b_point)
 
+    def __call__(self, *args, **kwargs):
+        print(f"Довжина лінії -> {self.__length} ({self.__a_point()} - {self.__b_point()})")
+        return self.__length
+
     @classmethod
     def get_length(cls, a_point, b_point):
         length = dist([a_point.point_x, a_point.point_y], [b_point.point_x, b_point.point_y])
@@ -50,16 +74,24 @@ class Line:
 
 
 class Triangle:
+
     def __init__(self, a_point=Point(0, 0), b_point=Point(0, 0), c_point=Point(0, 0), *args, **kwargs):
         if not isinstance(a_point, Point) or not isinstance(b_point, Point) or not isinstance(c_point, Point):
             raise TypeError("Данные указаны не верно, необходимо указать елементы класса Point")
         self.__a_point = a_point
         self.__b_point = b_point
         self.__c_point = c_point
-        self.__ab_line = Line(self.__a_point, self.__b_point).length
-        self.__bc_line = Line(self.__b_point, self.__c_point).length
-        self.__ca_line = Line(self.__c_point, self.__a_point).length
-        self.__area = self.get_area(self.__ab_line, self.__bc_line, self.__ca_line)
+        self.__ab_line = Line(self.__a_point, self.__b_point)
+        self.__bc_line = Line(self.__b_point, self.__c_point)
+        self.__ca_line = Line(self.__c_point, self.__a_point)
+        self.__area = self.get_area(self.__ab_line.length, self.__bc_line.length, self.__ca_line.length)
+
+    def __call__(self, *args, **kwargs):
+        lines = MyIter([self.__ab_line, self.__bc_line, self.__ca_line])
+        for line in lines:
+            line()
+
+
 
     @classmethod
     def get_area(self, ab_line, bc_line, ca_line):
